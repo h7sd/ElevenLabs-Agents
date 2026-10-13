@@ -1,12 +1,17 @@
 # ElevenLabs Agents for Scam With Your Friends
 
-Installs ElevenLabs Agents, its AI Backend dependency and the shared library. The optional setup step installs the local bridge. Node.js 22.13 or newer and your own ElevenLabs configuration are required.
+Setup installs the required shared Core, AI Backend 1.1.0 and the local ElevenLabs bridge. Node.js 22.13 or newer and your own ElevenLabs configuration are required. Skipping setup requires these dependencies and a running bridge to be installed manually.
 
-Download **ElevenLabs-Agents-1.0.1.zip** from [Releases](https://github.com/h7sd/ElevenLabs-Agents/releases/latest). Its ZIP contains only root-level DLLs and one optional post-install script. The shared library is installed to BepInEx/core; plugin DLLs go to BepInEx/plugins.
+Download **ElevenLabs-Agents-1.0.2.zip** from [Releases](https://github.com/h7sd/ElevenLabs-Agents/releases/latest). The ZIP has exactly two root files:
 
-The stock launcher offers setup steps only for catalogue entries. For a direct-URL installation, extract the ZIP and run its root script yourself with `-GameDir "C:\Path\To\Game"` while the game is closed.
+- `ScamWYF.ElevenLabsAgents.dll`
+- `setup-elevenlabs-agents.ps1`
 
-[Source and build scripts](https://github.com/h7sd/scam-with-your-friends-mods/tree/edacd91f088f9601b278bdd4cff7e172e09c1ae3/mod), [package instructions](https://github.com/h7sd/scam-with-your-friends-mods/blob/edacd91f088f9601b278bdd4cff7e172e09c1ae3/catalogue/README.md). Source revision: `edacd91f088f9601b278bdd4cff7e172e09c1ae3`. Licence notices are included in the post-install script.
+Package 1.0.2 changes distribution only; the DLL version remains 1.0.1. There is no launcher, dependency DLL or runtime inside this mod ZIP. Required dependencies are downloaded separately by setup using fixed HTTPS URLs and SHA-256 checks. Licence notices are included in the script.
+
+The stock launcher offers setup only for catalogue installations. If using a direct ZIP URL, extract it and run `setup-elevenlabs-agents.ps1 -GameDir "C:\Path\To\Game"` with the game closed.
+
+[Source](https://github.com/h7sd/scam-with-your-friends-mods/tree/b1732624d24d933de3af0a4a09ef74af90a9f461/mod) · [Package and dependency instructions](https://github.com/h7sd/scam-with-your-friends-mods/blob/b1732624d24d933de3af0a4a09ef74af90a9f461/catalogue/README.md)
 
 Catalogue entry:
 
@@ -21,25 +26,13 @@ Catalogue entry:
       "fileName": "ScamWYF.ElevenLabsAgents.dll",
       "folder": "plugins",
       "expectsPluginAttribute": true
-    },
-    {
-      "fileName": "ScamWYF.AiBackend.dll",
-      "folder": "plugins",
-      "expectsPluginAttribute": true
-    },
-    {
-      "fileName": "ScamWYF.Modding.Core.dll",
-      "folder": "core",
-      "expectsPluginAttribute": false
     }
   ],
   "postInstall": [
     {
       "script": "setup-elevenlabs-agents.ps1",
-      "description": "Downloads and installs the local ElevenLabs bridge and opens its setup page. Requires Node.js 22.13 or newer. Skipping leaves speech and AI unavailable until you set up and start the bridge yourself."
+      "description": "Downloads the required Core, AI Backend and local ElevenLabs bridge, then opens setup. Requires Node.js 22.13+. If skipped, these dependencies and a running bridge must already be installed for the mod to work."
     }
   ]
 }
 ```
-
-Unofficial community mod, unaffiliated with the game developer or the external service.
